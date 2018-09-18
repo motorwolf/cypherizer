@@ -19,12 +19,16 @@ class App extends Component {
     let textInput = event.target.value;
     let textLen = textInput.length;
     let newLetter = textInput[textLen - 1]; // will need to split this off too. this takes the last letter of the input, the one we need to convert.
-    let currIndex = cypher.indexOf(newLetter);
+    let currIndex = cypher.indexOf(newLetter.toLowerCase());
     if(currIndex === -1){
       this.setState({entry:textInput});
     } else {
+      let restOfString = textInput;
+      
+      restOfString.split("").splice((textLen - 1),1).join("");
+      console.log(restOfString);
       let newIndex = currIndex + 5 + textLen;
-      this.setState({entry: textInput + cypher[this.subtractor(newIndex)]});
+      this.setState({entry: restOfString + cypher[this.subtractor(newIndex)]});
     }
   }
 
